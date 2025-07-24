@@ -42,6 +42,9 @@ export async function setupRootStore(rootStore: RootStore) {
   // track changes & save to AsyncStorage
   _disposer = onSnapshot(rootStore, (snapshot) => storage.save(ROOT_STATE_STORAGE_KEY, snapshot))
 
+  // Load stored authentication data
+  rootStore.authenticationStore.loadStoredAuth()
+
   const unsubscribe = () => {
     _disposer?.()
     _disposer = undefined
